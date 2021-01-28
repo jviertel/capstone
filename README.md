@@ -81,8 +81,34 @@ Models for the database are in models.py. The model classes also contain methods
 
 - manufacturer_id: foreign key, relates to id in Manufacturer table
 
+## Testing
+Unittests can be run on the app from the test_app.py file. To run the tests:
+
+- Create database (in psql)
+
+DROP DATABASE IF EXISTS pedalsdb_test
+
+CREATE DATABASE pedalsdb_test
+
+(from regular command line)
+psql pedalsdb_test < pedalsdb.psql
+
+- Run Tests
+
+python test_app.py
+
+Note: The test_app.py file contains tokens that are required for the tests to run correctly. The tokens are valid for 24 hours from when they were created. 
+
 ## API Endpoints
 
+- GET /manufacturers
+- GET /manufacturers/<manufacturer_id>/pedals
+- POST /manufacturers
+- POST /pedals
+- PATCH /manufacturers/<manufacturer_id>
+- PATCH /pedals/<pedal_id>
+- DELETE /manufacturers/<manufacturer_id>
+- DELETE /pedals/<pedal_id>
 
 
 
