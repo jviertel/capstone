@@ -68,7 +68,10 @@ class TestPedalsAPI(unittest.TestCase):
 
     #Test post request to /manufacturers
     def test_post_manufacturer(self):
-        res = self.client().post('/manufacturers', 
+        res = self.client().post('/manufacturers',
+            headers = {
+                "Authorization": "Bearer {}".format(self.site_owner_token)
+            }, 
             json = {
                 'name': 'Volcanic Audio',
                 'website_link': 'https://www.volcanicaudio.com'
@@ -84,6 +87,9 @@ class TestPedalsAPI(unittest.TestCase):
     #Test unsuccessful post request entry already exists to /manufacturers
     def test_manufacturer_already_exists(self):
         res = self.client().post('/manufacturers',
+            headers = {
+                "Authorization": "Bearer {}".format(self.site_owner_token)
+            },
             json = {
                 'name': 'Boss',
                 'website_link': 'https://www.bossaudio.com'
@@ -99,6 +105,9 @@ class TestPedalsAPI(unittest.TestCase):
     #Test post request to /pedals
     def test_post_pedal(self):
         res = self.client().post('/pedals',
+            headers = {
+                "Authorization": "Bearer {}".format(self.site_owner_token)
+            },
             json = {
                 'name': 'California Surf',
                 'pedal_type': 'Reverb',
@@ -117,6 +126,9 @@ class TestPedalsAPI(unittest.TestCase):
     #Test unsuccessful post request entry already exists to /pedals
     def test_pedal_already_exists(self):
         res = self.client().post('/pedals',
+            headers = {
+                "Authorization": "Bearer {}".format(self.site_owner_token)
+            },
             json = {
                 'name': 'Afterglow',
                 'pedal_type': 'Chorus',
@@ -135,6 +147,9 @@ class TestPedalsAPI(unittest.TestCase):
     #Test patch request to /manufacturers/37
     def test_update_manufacturer(self):
         res = self.client().patch('/manufacturers/37',
+            headers = {
+                "Authorization": "Bearer {}".format(self.site_owner_token)
+            },
             json = {
                 'name': 'Changed Name',
                 'website_link': 'https://www.pedals.info.com'
@@ -150,6 +165,9 @@ class TestPedalsAPI(unittest.TestCase):
     #Test unsuccessful patch request not found to /manufacturers/5000
     def test_patch_404_manufacturer_not_exists(self):
         res = self.client().patch('/manufacturers/5000',
+            headers = {
+                "Authorization": "Bearer {}".format(self.site_owner_token)
+            },
             json = {
                 'name': 'Changed Name',
                 'website_link': 'https://www.pedals.info.com'
@@ -162,6 +180,9 @@ class TestPedalsAPI(unittest.TestCase):
     #Test patch request to /pedals/472
     def test_update_pedals(self):
         res = self.client().patch('/pedals/472',
+            headers = {
+                "Authorization": "Bearer {}".format(self.site_owner_token)
+            },
             json = {
                 'name': 'Hot Rod',
                 'pedal_type': 'Distortion',
@@ -180,6 +201,9 @@ class TestPedalsAPI(unittest.TestCase):
     #Test unsuccessful patch request not found to /pedals/5000
     def test_patch_404_pedal_not_exists(self):
         res = self.client().patch('/pedals/5000',
+            headers = {
+                "Authorization": "Bearer {}".format(self.site_owner_token)
+            },
             json = {
                 'name': 'Hot Rod',
                 'pedal_type': 'Distortion',
@@ -195,7 +219,10 @@ class TestPedalsAPI(unittest.TestCase):
 
     #Test delete request to /manufacturers/29
     def test_delete_manufacturer(self):
-        res = self.client().delete('/manufacturers/29')
+        res = self.client().delete('/manufacturers/29',
+            headers = {
+                "Authorization": "Bearer {}".format(self.site_owner_token)
+            })
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 200)
@@ -206,7 +233,10 @@ class TestPedalsAPI(unittest.TestCase):
 
     #Test delete manufacturer not found to /manufacturers/5000
     def test_404_manufacturer_to_delete_not_exists(self):
-        res = self.client().delete('/manufacturers/5000')
+        res = self.client().delete('/manufacturers/5000',
+            headers = {
+                "Authorization": "Bearer {}".format(self.site_owner_token)
+            })
         data = json.loads(res.data)
 
         data = json.loads(res.data)
@@ -216,7 +246,10 @@ class TestPedalsAPI(unittest.TestCase):
     
     #Test delete request to /pedals/600
     def test_delete_pedal(self):
-        res = self.client().delete('/pedals/600')
+        res = self.client().delete('/pedals/600',
+            headers = {
+                "Authorization": "Bearer {}".format(self.site_owner_token)
+            })
         data = json.loads(res.data)
 
         self.assertEqual(res.status_code, 200)
@@ -227,7 +260,10 @@ class TestPedalsAPI(unittest.TestCase):
 
     #Test delete manufacturer not found to /manufacturers/5000
     def test_404_pedal_to_delete_not_exists(self):
-        res = self.client().delete('/pedals/5000')
+        res = self.client().delete('/pedals/5000',
+            headers = {
+                "Authorization": "Bearer {}".format(self.site_owner_token)
+            })
         data = json.loads(res.data)
 
         data = json.loads(res.data)
@@ -254,24 +290,6 @@ class TestPedalsAPI(unittest.TestCase):
         self.assertTrue(data['num_manufacturers'])
         self.assertEqual(data['success'], True)
 
-    #Test post manufacturer with RBAS success to /manufacturers
-    #with Site Owner credentials
-    def test_permissions_site_owner(self):
-        res = self.client().post('/manufacturers', 
-            headers = {
-                "Authorization": "Bearer {}".format(self.site_owner_token)
-            },
-            json = {
-                'name': 'Extreme Pedals',
-                'website_link': 'https://www.extremepedals.com'
-            })
-        data = json.loads(res.data)
-
-        self.assertEqual(res.status_code, 200)
-        self.assertTrue(data['created_manufacturer'])
-        self.assertTrue(len(data['manufacturers']))
-        self.assertTrue(data['num_manufacturers'])
-        self.assertEqual(data['success'], True)
 
     #Test update pedal with RBAC denied to /pedals/365
     #with Contributor credentials
@@ -290,31 +308,7 @@ class TestPedalsAPI(unittest.TestCase):
         data = json.loads(res.data)
         
         self.assertEqual(res.status_code, 401)
-        self.assertTrue(data, 'Permission not in permissions list')
-
-
-    #Test update pedal with RBAC success to /pedals/283
-    #with Site Owner credentials
-    def test_permissions_site_owner_update(self):
-        res = self.client().patch('/pedals/283',
-            headers = {
-                "Authorization": "Bearer {}".format(self.site_owner_token)
-            },
-            json = {
-                'name': 'Twister',
-                'pedal_type': 'Rotary Speaker',
-                'new_price': '$59.00',
-                'used_price': '$39.00',
-                'manufacturer_id': 17
-            })
-        data = json.loads(res.data)
-
-        self.assertEqual(res.status_code, 200)
-        self.assertEqual(data['updated_pedal'], 283)
-        self.assertTrue(len(data['pedals']))
-        self.assertTrue(data['num_pedals'])
-        self.assertEqual(data['success'], True)
-        
+        self.assertTrue(data, 'Permission not in permissions list')       
 
 
 if __name__ == '__main__':
