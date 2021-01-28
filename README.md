@@ -32,7 +32,7 @@ psql pedalsdb_test < pedalsdb.psql
 ## Running
 The app can be run using the commands below:
 
-Windows
+#### Windows
 
 set FLASK_APP = app.py
 
@@ -41,8 +41,7 @@ set FLASK_ENV = development
 flask run
 
 
-
-Linux
+#### Linux
 
 export FLASK_APP = app.py
 
