@@ -9,10 +9,13 @@ That's why I created this guitar pedals API. A few months ago, I started hand ca
 ## Installation
 
 As wtih most Python projects, it is very helpful to have the dependencies in a virtual environment. Instructions for how to set up and activate a virtual environment can be found at the below link.
+
 https://www.geeksforgeeks.org/creating-python-virtual-environment-windows-linux/
 
 The requirements for the project are listed in the requirements.txt file. 
+
 Run:
+
 pip install requirement.txt
 
 The project also relies on a copy of the pedalsdb database. A copy can be created through use of the pedalsdb.psql dump file. 
