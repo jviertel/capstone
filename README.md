@@ -30,13 +30,31 @@ CREATE DATABASE pedalsdb_test
 psql pedalsdb_test < pedalsdb.psql
 
 ## Running
-The app can be run by using the commands below:
+The app can be run using the commands below:
 
 Windows
 
 set FLASK_APP = app.py
+
 set FLASK_ENV = development
+
 flask run
+
+
+Linux
+
+export FLASK_APP = app.py
+
+export FLASK_ENV = development
+
+flask run
+
+
+It is also hosted on Heroku at the url:
+
+http://pedalsdb.herokuapp.com/
+
+Note: As noted above, there is no frontend yet for this api, so please test using the steps provided below. 
 
 
 
