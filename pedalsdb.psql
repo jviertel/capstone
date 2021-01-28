@@ -1,0 +1,1071 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 13.1
+-- Dumped by pg_dump version 13.1
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
+--
+-- Name: Manufacturer; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Manufacturer" (
+    id integer NOT NULL,
+    name character varying(120),
+    website_link character varying(500)
+);
+
+
+ALTER TABLE public."Manufacturer" OWNER TO postgres;
+
+--
+-- Name: Manufacturer_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."Manufacturer_id_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."Manufacturer_id_seq" OWNER TO postgres;
+
+--
+-- Name: Manufacturer_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."Manufacturer_id_seq" OWNED BY public."Manufacturer".id;
+
+
+--
+-- Name: Pedal; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Pedal" (
+    id integer NOT NULL,
+    name character varying(120),
+    pedal_type character varying(120),
+    new_price character varying,
+    used_price character varying,
+    manufacturer_id integer NOT NULL
+);
+
+
+ALTER TABLE public."Pedal" OWNER TO postgres;
+
+--
+-- Name: Pedal_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."Pedal_id_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public."Pedal_id_seq" OWNER TO postgres;
+
+--
+-- Name: Pedal_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."Pedal_id_seq" OWNED BY public."Pedal".id;
+
+
+--
+-- Name: alembic_version; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.alembic_version (
+    version_num character varying(32) NOT NULL
+);
+
+
+ALTER TABLE public.alembic_version OWNER TO postgres;
+
+--
+-- Name: Manufacturer id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Manufacturer" ALTER COLUMN id SET DEFAULT nextval('public."Manufacturer_id_seq"'::regclass);
+
+
+--
+-- Name: Pedal id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Pedal" ALTER COLUMN id SET DEFAULT nextval('public."Pedal_id_seq"'::regclass);
+
+
+--
+-- Data for Name: Manufacturer; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Manufacturer" (id, name, website_link) FROM stdin;
+2	Ampeg	https://ampeg.com/index.html
+3	AMT Electronics	https://amtelectronics.com/new/
+4	BBE	http://www.bbesound.com/
+5	Behringer	https://www.behringer.com/
+6	Bogner	https://www.bogneramplification.com/
+7	Boss	https://www.boss.info/us/
+8	Carl Martin	https://www.carlmartin.com/
+9	Catalinbread	https://catalinbread.com/
+10	Digitech	https://www.digitech.com/
+11	Donner	https://www.donnerdeal.com/
+12	Dunlop	https://www.jimdunlop.com/
+13	Earthquaker Devices	https://www.earthquakerdevices.com/home
+14	Electro-Harmonix	https://www.ehx.com/
+15	Empress Effects	https://empresseffects.com/
+16	Ernie Ball	https://www.ernieball.com/
+17	Eventide	https://www.eventideaudio.com/
+18	Fender	https://www.fender.com/
+19	Guyatone	https://www.guyatone.com/
+20	Ibanez	https://www.ibanez.com/usa/
+21	Jackson Audio	https://jackson.audio/
+22	JHS	https://www.jhspedals.info/
+23	Joyo	https://www.joyoaudio.com/
+24	Keeley	https://robertkeeley.com/
+25	Korg	https://www.korg.com/us/products/
+26	Lehle	https://lehle.com/EN/start
+27	Mad Professor	https://www.mpamp.com/
+28	Maxon	https://maxonfx.com/
+29	Mission Engineering	https://missionengineering.com/
+30	Mooer	http://www.mooeraudio.com/
+31	Morley	https://www.morleyproducts.com/
+32	MXR	https://www.jimdunlop.com/products/electronics/mxr/
+33	NUX	https://www.nuxefx.com/index.html
+34	One Control	https://www.one-control.com/
+35	Orange	https://orangeamps.com/products/fx-pedals/
+36	Outlaw Effects	http://www.outlawguitareffects.com/
+37	Pigtronix	https://www.pigtronix.com/
+38	ProCo	https://www.procosound.com/
+39	Radial Engineering	https://www.radialeng.com/
+40	Rockett Pedals	https://rockettpedals.com/
+41	Rocktron	http://www.rocktron.com/
+42	T-Rex Engineering	https://www.t-rex-effects.com/
+43	TC Electronic	https://www.tcelectronic.com/
+44	Tech 21	http://www.tech21nyc.com/
+45	Truetone	https://truetone.com/
+46	Two Notes Audio Engineering	https://www.two-notes.com/#
+47	Vox	https://voxamps.com/
+48	Walrus Audio	https://www.walrusaudio.com/
+49	Wampler	https://www.wamplerpedals.com/
+50	Way Huge	https://www.jimdunlop.com/products/electronics/way-huge/
+51	Xotic	https://xotic.us/effects/
+52	Zvex	https://www.zvex.com/
+\.
+
+
+--
+-- Data for Name: Pedal; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Pedal" (id, name, pedal_type, new_price, used_price, manufacturer_id) FROM stdin;
+1	Blacksmith BD-69	Distortion	$90.00	$60.00	4
+2	Bohemian 	Treble Booster	$150.00	$140.00	4
+3	Freq Boost	Boost	\N	$115.00	4
+4	Mini Boosta Grande MBG-20	Transparent Clean Boost	$80.00	$50.00	4
+5	G Screamer OG-1 Gus G Signature	Overdrive	$120.00	$95.00	4
+6	Mind Bender MB-2	Dual-mode Vibrator/Chorus	\N	$84.00	4
+7	OptiComp OC-5	Optical Compressor	$150.00	\N	4
+8	Mini Sonic Stomp MS-92	Sonic Maximizer	$120.00	$90.00	4
+9	Sonic Stomp SS-92	Sonic Maximizer	\N	$50.00	4
+10	Soul Vibe SV-74	Rotary Speaker Simulator	$140.00	$64.00	4
+11	Tremor TR-63B	Dual-mode Analog Tremolo	$100.00	$71.00	4
+12	Two Timer TT-2	Dual-mode All-Analog Delay	$120.00	$69.00	4
+13	VariComp VC-3080	OTA Compressor	$150.00	$80.00	4
+14	Ben-Wah	Modified 60's Wah	$150.00	$75.00	4
+15	Windowpane WP-69	Silicon Fuzz	$110.00	$85.00	4
+16	MT-2W	Metal Zone Waza Craft Distortion	$150.00	$125.00	7
+17	JB-2	Angry Driver	$200.00	$170.00	7
+18	BD-2	Blues Driver	$100.00	$57.00	7
+19	BD-2W	Blues Driver Waza Craft 	$160.00	$133.00	7
+20	SD-1	Super Overdrive	$50.00	$32.00	7
+21	SD-1W	Super Overdrive Waza Craft	$150.00	$118.00	7
+22	OD-200	Hybrid Drive	$250.00	$190.00	7
+23	OD-1X	Overdrive	$160.00	$119.00	7
+24	DS-1X	Distortion	$160.00	$127.00	7
+25	DS-1	Distortion	$50.00	$31.00	7
+26	BC-2	Combo Drive	$115.00	$70.00	7
+27	DS-2	Turbo Distortion	$100.00	$80.00	7
+28	FZ-5	Fuzz	$100.00	$85.00	7
+29	MD-2	Mega Distortion	$90.00	$44.00	7
+30	ML-2	Metal Core	$100.00	$80.00	7
+31	OD-3	Overdrive	$100.00	$66.00	7
+32	OS-2	Overdrive/Distortion	$100.00	$35.00	7
+33	ST-2	Power Stack Distortion	$100.00	$72.00	7
+34	DD-8 	Digital Delay	$160.00	$141.00	7
+35	DD-3T 	Digital Delay	$140.00	$110.00	7
+36	DM-2W	Delay	$150.00	$130.00	7
+37	DD-200	Digital Delay	$250.00	$199.00	7
+38	DD-500	Digital Delay	$350.00	$220.00	7
+39	DD-3	Digital Delay	$140.00	$86.00	7
+40	DD-7	Digital Delay	$160.00	$90.00	7
+41	RV-500	Reverb	$350.00	$265.00	7
+42	RV-6	Reverb	$150.00	$105.00	7
+43	TE-2	Tera Echo	$150.00	$95.00	7
+44	RE-20	Space Echo	$270.00	$215.00	7
+45	DC-2W	Dimension C	$250.00	$205.00	7
+46	CE-2W	Chorus	$200.00	$172.00	7
+47	VB-2W	Vibrato	$230.00	$188.00	7
+48	MD-200	Modulation	$250.00	$213.00	7
+49	MD-500	Modulation	$350.00	$295.00	7
+50	BF-3	Flanger	$160.00	$100.00	7
+51	CE-5	Chorus Ensemble	$140.00	$60.00	7
+52	CH-1	Super Chorus	$120.00	$57.00	7
+53	MO-2	Multi-Overtone	$130.00	$103.00	7
+54	PH-3	Phase Shifter	$130.00	$50.00	7
+55	PS-6	Harmonist Pitch Shifter	$150.00	$93.00	7
+56	TR-2	Tremolo	$100.00	$80.00	7
+57	RT-20	Rotary Ensemble	$240.00	$180.00	7
+58	SL-20	Slicer	\N	\N	7
+59	OC-3	Super Octave	$130.00	$75.00	7
+60	EQ-200	Graphic Equalizer	$250.00	\N	7
+61	CP-1X	Compressor	$150.00	$138.00	7
+62	PW-3	Wah Pedal	$130.00	$98.00	7
+63	AW-3	Dynamic Wah	$140.00	$54.00	7
+64	CS-3	Compressor/Sustainer	$100.00	$51.00	7
+65	GE-7 	Graphic Equalizer	$120.00	$60.00	7
+66	AC-3	Acoustic Simulator	$150.00	$80.00	7
+67	AD-10	Acoustic Preamp	$350.00	$250.00	7
+68	AD-2	Acoustic Preamp	$100.00	$80.00	7
+69	VE-8	Acoustic Singer	$300.00	$220.00	7
+70	SY-1	Synthesizer	$200.00	$170.00	7
+71	VO-1	Vocoder	$250.00	$170.00	7
+72	LS-2	Line Selector/Power Supply	$100.00	$57.00	7
+73	NS-2	Noise Suppresor	$100.00	$53.00	7
+74	RC-10R	Rhythm Loop Station	$300.00	$245.00	7
+75	RC-30	Loop Station	$300.00	$230.00	7
+76	RC-1	Loop Station	$100.00	$72.00	7
+77	RC-3	Loop Station	$200.00	$160.00	7
+78	FV-500L	Stereo Volume 	$120.00	$91.00	7
+79	FV-500H	Mono Volume 	$120.00	$90.00	7
+80	FV-50L	Stereo Volume 	$120.00	$55.00	7
+81	FV-30H	Compact Volume	$100.00	$82.00	7
+82	FV-50H	Stereo Volume 	$120.00	$50.00	7
+83	FV-30L	Compact Volume	$100.00	$84.00	7
+84	DS-1	Distortion	\N	$36.00	7
+85	DA-2	Adaptive Distortion	$130.00	$80.00	7
+86	EV-30	Dual Expression	$100.00	$93.00	7
+87	PS-2	Digital Pitch Shifter 	\N	$62.00	7
+88	PW-2	Power Driver	\N	$50.00	7
+89	FRV-1	63 Fender Reverb	\N	$257.00	7
+90	Sdrum	Strummable Drums	$140.00	$97.00	10
+91	DOD Gunslinger	Mosfet Distortion	$100.00	$50.00	10
+92	DOD Looking Glass	Class-A FET Overdrive	$175.00	$110.00	10
+93	DOD Carcosa	Analog Fuzz	$110.00	$88.00	10
+94	Whammy (5th Gen)	2-Mode Pitch Shifter	$240.00	$200.00	10
+95	The Drop	Polyphonic Drop Tune	$165.00	$130.00	10
+96	Whammy DT 	Classic Pitch Shifting with Drop and Raised Tuning	$355.00	$260.00	10
+97	Whammy Ricochet	Pitch Shifter	$185.00	$115.00	10
+98	JamMan Stereo	Stereo Looping Station	$280.00	$130.00	10
+99	Obscura	Altered Delay	$170.00	$110.00	10
+100	DOD Rubberneck	Analog Delay	$270.00	$120.00	10
+101	JamMan Express XT	Stereo Looper	$110.00	$85.00	10
+102	JamMan Solo XT	Stereo Looper	$150.00	$146.00	10
+103	Polara	Reverb	$170.00	$112.00	10
+104	Mosaic	Polyphonic 12-String Effect	$185.00	$110.00	10
+105	DOD Mini Expression	Expression Pedal	$100.00	$45.00	10
+106	DOD Mini Volume	Volume Pedal	$110.00	$78.00	10
+107	CabDryVR	Dual Cabinet Simulator	$170.00	$87.00	10
+108	FreqOut	Natural Feedback Creator	$195.00	$122.00	10
+109	DB01B Dimebag Cry Baby From Hell	Wah	$160.00	\N	12
+110	GCJ95 Gary Clark Jr. Cry Baby	Wah	$180.00	\N	12
+111	JC95 Jerry Cantrell Cry Baby	Wah	$160.00	$150.00	12
+112	JC95B Jerry Cantrell Rainier Fog Cry Baby	Wah	$160.00	\N	12
+113	535QC Cry Baby  Chrome	Multi-Wah	$170.00	$110.00	12
+114	CBM535Q Cry Baby Mini 	Wah	$150.00	$128.00	12
+115	GZR95 Geezer Butler Cry Baby	Wah	$170.00	$125.00	12
+116	CBM95 Cry Baby Mini	Wah	$100.00	$60.00	12
+117	JP95 John Petrucci Cry Baby	Wah	$200.00	$100.00	12
+118	CM95 Clyde McCoy Cry Baby 	Wah 	$200.00	$90.00	12
+119	SC95 Slash Cry Baby	Classic Wah	$150.00	$118.00	12
+120	EVH95 EVH 	Wah	$170.00	$93.00	12
+121	95Q Cry Baby 	Wah	$130.00	$60.00	12
+122	JH1D Jimi Hendrix Cry Baby	Wah	$140.00	$75.00	12
+123	MC404 Cae 	Wah	$170.00	$108.00	12
+124	GCB95 Cry Baby Standard 	Wah	$80.00	$50.00	12
+125	JB95 Joe Bonamassa Cry Baby	Wah	$170.00	$95.00	12
+126	KH95 Kirk Hammett Cry Baby	Wah	$160.00	$87.00	12
+127	SW95 Slash Cry Baby 	Wah	$170.00	$106.00	12
+128	BG95 Buddy Guy Cry Baby 	Wah	$200.00	$145.00	12
+129	GCB95F Cry Baby Classic	Wah	$110.00	$50.00	12
+130	535Q Cry Baby 	Multi-Wah	$150.00	$115.00	12
+131	DCR1FC Cry Baby Rack Foot Controller	Foot Controller	$100.00	$81.00	12
+132	GCB80 High Gain	Volume Pedal	$90.00	$44.00	12
+133	CSP025 Cry Baby Rack Foot Controller - Auto Return	Foot Controller	$100.00	\N	12
+134	BFG07 Siete Santos Octavio	Fuzz and EQ	$200.00	$145.00	12
+135	JHW1 Jimi Hendrix '69 Psych Series Fuzz Face	Distortion	$130.00	$113.00	12
+136	JHW2 Jimi Hendrix '69 Psych Series Octavio 	Fuzz  	$130.00	$90.00	12
+137	JHW3 Jimi Hendrix '69 Psych Series Uni-Vibe	Chorus/Vibrato	$130.00	$113.00	12
+138	JHW4 Jimi Hendrix '69 Psych Series Band of Gypsys 	Fuzz	$130.00	$113.00	12
+139	EP103 Echoplex	Delay	$200.00	$150.00	12
+140	EP101 Echoplex	Preamp	$120.00	$95.00	12
+141	DVP3 Volume (X) 	Volume Pedal	$120.00	$72.00	12
+142	DVP4 Volume (X) Mini	Volume Pedal	$120.00	$90.00	12
+143	FFM1 Silicon Fuzz Face Mini	Distortion	$100.00	$79.00	12
+144	FFM2 Germanium Fuzz Face Mini	Distortion	$130.00	$80.00	12
+145	FFM3 Jimi Hendrix Fuzz Face Mini	Distortion	$120.00	$100.00	12
+146	FFM4 Joe Bonamassa Fuzz Face Mini	Distortion	$150.00	$105.00	12
+147	FFM6 Band of Gypsys Fuzz Face Mini	Distortion	$120.00	\N	12
+148	JHF1 Jimi Hendrix Fuzz Face 	Distortion	$150.00	\N	12
+149	JDF2 Fuzz Face	Disortion	$130.00	$95.00	12
+150	JD4S Rotovibe 	Chorus/Vibrato	$280.00	$145.00	12
+151	Afterneath 	Enhanced Otherworldly Reverberator	$200.00	$150.00	13
+152	Afterneath 	Eurorack Module	$250.00	$230.00	13
+153	Aqueduct	Vibrato	$200.00	$170.00	13
+154	Arpanoid	Polyphonic Pitch Arpeggiator	$230.00	$125.00	13
+155	Arrows	Preamp Booster	$100.00	$66.00	13
+156	Avalanche Run Special Edition Attack of the Yeti	Reverb/Delay	$300.00	$245.00	13
+157	Avalanche Run	Stereo Reverb and Delay with Tap Tempo	$300.00	$231.00	13
+158	Bit Commander	Analog Octave Synth	$190.00	$120.00	13
+159	Cloven Hoof	Fuzz Grinder	$180.00	$120.00	13
+160	Data Corrupter	Modulated Monophonic Harmonizing PLL	$230.00	$205.00	13
+161	The Depths	Analog Optical Vibe Machine	$200.00	$140.00	13
+162	Disaster Transport SR	Advanced Modulated Delay and Reverb Machine	$300.00	$240.00	13
+163	Disaster Transport Jr	Delay	$166.00	$110.00	13
+164	Dispatch Master	Digital Delay and Reverb	$200.00	$158.00	13
+165	Dunes	Mini Mega Ultimate Overdrive	$190.00	$140.00	13
+166	Erupter	Ultimate Fuzz Tone	$150.00	$95.00	13
+167	Ghost Echo	Vintage Voiced Reverb	$180.00	$145.00	13
+168	Grand Orbiter	Phase Machine	$200.00	$115.00	13
+169	Hoof	Hybrid Fuzz	$180.00	$115.00	13
+170	Hoof Reaper	Double Fuzz with Octave Up	$300.00	$200.00	13
+171	Hummingbird 	Repeat Percussions	$160.00	$110.00	13
+172	Levitation	Reverberation Machine	$190.00	$140.00	13
+173	Night Wire	Harmonic Tremolo	$200.00	$189.00	13
+174	Organizer	Polyphonic Organ Emulator	$190.00	$120.00	13
+175	Palisades	Mega Ultimate Overdrive	$250.00	$185.00	13
+176	Park Fuzz Sound	Vintage Germanium Fuzz Tone	$180.00	$138.00	13
+177	Plumes	Small Signal Shredder	$100.00	$75.00	13
+178	Pyramids	Stereo Flanging Device	$300.00	$2,221.00	13
+179	Rainbow Machine	Polyphonic Pitch Mesmerizer	$230.00	$150.00	13
+180	Sea Machine	Super Chorus	$200.00	$140.00	13
+181	Space Spiral	Modulated Delay Device	$200.00	$156.00	13
+182	Spatial Delivery	Envelope Filter with Sample & Hold	$200.00	$155.00	13
+183	Swiss Thing s	Pedalboard Reconciler	$250.00	$186.00	13
+184	Tentacle	Analog Octave Up	$130.00	$90.00	13
+185	Tone Job	EQ and Boost	$160.00	$110.00	13
+186	The Warden	Optical Compressor	$200.00	$160.00	13
+187	Westwood 	Transluscent Drive Manipulator	$180.00	$151.00	13
+188	BASS9	Bass Machine	$222.00	$160.00	14
+189	C9	Organ Machine	$222.00	$145.00	14
+190	KEY9	Electric Piano Machine	$222.00	$155.00	14
+191	MEL9	Tape Relay Machine	$222.00	$168.00	14
+192	SYNTH9	Synthesizer Machine	$222.00	$145.00	14
+193	Bad Stone	Phase Shifter	$74.00	$67.00	14
+194	Deluxe Electric Mistress XO	Analog Flanger	$154.00	$110.00	14
+195	Deluxe Memory Man XO	Analog Delay/Chorus/Vibrato	$222.00	\N	14
+196	Good Vibes 	Analog Modulator	$144.00	$115.00	14
+197	Lester G	Rotary Speaker	$240.00	$180.00	14
+198	Lester K	Stereo Rotary Speaker	$192.00	$130.00	14
+199	Mod 11	Modulator Multi-Effects	$151.00	$115.00	14
+200	Mod Rex	Polyrhythmic Modulator	$250.00	$179.00	14
+201	Nano Clone	Chorus	$48.00	$37.00	14
+202	Neo Clone	Analog Chorus	$74.00	$43.00	14
+203	Neo Mistress	Flanger 	$79.00	$72.00	14
+204	Small Clone	Analog Chorus	$88.00	$75.00	14
+205	Small Stone (Nano Chassis)	Phase Shifter	$72.00	$55.00	14
+206	Stereo Clone Theory	Analog Chorus/Vibrato	$112.00	$78.00	14
+207	Stereo Electric Mistress	Flanger/Chorus	$131.00	$109.00	14
+208	Stereo Polychorus	Analog Flanger and Chorus	$223.00	\N	14
+209	Worm	Analog Modulation Multi-Effects	$105.00	$80.00	14
+210	Chillswitch	Momentary Line Selector	$54.00	\N	14
+211	\N	Dual Expression Pedal	$73.00	\N	14
+212	\N	Expression Pedal	$50.00	\N	14
+213	\N	Volume Pedal	$63.00	$40.00	14
+214	22500	Multi-Track Recording Looper	$277.00	$215.00	14
+215	45000	Multi-Track Looping Recorder	$479.00	$478.00	14
+216	720	Stereo Looper	$154.00	$120.00	14
+217	Canyon	Delay and Looper	$151.00	$99.00	14
+218	Grand Canyon	Delay and Looper	$272.00	$272.00	14
+219	Nano Looper 360	Looper	$107.00	$80.00	14
+220	Hum Debugger	Hum Eliminator	$140.00	$63.00	14
+221	Silencer	Noise Gate	$69.00	$40.00	14
+222	Attack Decay	Tape Reverse Simulation	$125.00	$100.00	14
+223	Frequency Analyzer	\N	$148.00	$100.00	14
+224	HOG2	Harmonic Octave Generator	$479.00	$375.00	14
+225	Holy Stain	Multi-Effects	$128.00	$96.00	14
+226	Micro POG	Polyphonic Octave Generator	$214.00	$150.00	14
+227	Micro Synthesizer	Analog Synthesizer	$286.00	$182.00	14
+228	Mono Synth	Synthesizer	$124.00	$100.00	14
+229	Nano POG	Polyphonic Octave Generator	$203.00	$160.00	14
+230	Octave Multiplexer	Sub-Octave Generator	$79.00	$74.00	14
+231	Octavix	Octave Fuzz	$101.00	$70.00	14
+232	Pitch Fork	Polyphonic Pitch Shifter	$175.00	$128.00	14
+233	POG2	Polyphonic Octave Generator	$352.00	$267.00	14
+234	Ravish	Sitar	$245.00	$160.00	14
+235	Ring Thing	Single Sideband Modulator	$240.00	$172.00	14
+236	Slammi Plus	Pitch Shifter/Harmony Pedal	$168.00	$97.00	14
+237	Soul POG	Multi-Effect: Nanno POG+Soul Food	$286.00	$199.00	14
+238	Superego	Synth Engine	$214.00	$140.00	14
+239	Freeze	Sound Retainer	$128.00	$95.00	14
+240	Graphic Fuzz	EQ/Distortion/Sustainer	$151.00	$70.00	14
+241	Platform	Stereo Compressor/Limiter	$168.00	$150.00	14
+242	Soul Preacher	Compressor/Sustainer	$89.00	$47.00	14
+243	Tone Corset	Analog Compressor	$90.00	$75.00	14
+244	#1 Echo	Digital Delay	$119.00	$78.00	14
+245	Deluxe Memory Boy	Analog Delay w/ Tap Tempo	$169.00	$105.00	14
+246	Deluxe Memory Man 550-TT	Analog Delay	$255.00	$197.00	14
+247	Deluxe Memory Man 1100-TT	Delay	$383.00	\N	14
+248	Memory Boy	Delay	$122.00	$100.00	14
+249	Memory Toy	Analog Delay w/ Modulation	$93.00	$50.00	14
+250	Stereo Memory Man with Hazarai	Digital Delay/Looper	$222.00	\N	14
+251	Big Muff Pi	Distortion/Sustainer	$85.00	$69.00	14
+252	Big Muff Pi with Tone Wicker	Distortion 	$91.00	$70.00	14
+253	Cock Fight	Cocked Talking Wah	$117.00	$80.00	14
+254	Cock Fight+	Talking Wah and Fuzz 	$128.00	\N	14
+255	Crayon	Full Range Overdrive	$63.00	$49.00	14
+256	Deluxe Big Muff Pi	Reimagined Big Muff Pi	$128.00	$93.00	14
+257	Double Muff	Fuzz/Overdrive	$58.00	$56.00	14
+258	East River Drive	Overdrive	$68.00	$45.00	14
+259	EHX Tortion	JFET Overdrive	$179.00	$139.00	14
+260	Flatiron	Fuzz/Distortion	$73.00	$55.00	14
+261	Germanium 4 Big Muff Pi	Distortion/Overdrive	$112.00	$73.00	14
+262	Germanium OD	Overdrive	$78.00	$64.00	14
+263	Green Russian Big Muff	Distortion/sustainer	$90.00	$55.00	14
+264	Hot Tubes Nano	Overdrive	$66.00	$55.00	14
+265	Hot Wax	Multi-Overdrive	$112.00	$95.00	14
+266	Little Big Muff Pi	Distortion/Sustainer	$73.00	$50.00	14
+267	LPB-1	Linear Power Booster Preamp	$41.00	$25.00	14
+268	Lumberjack	Log Overdriver	$63.00	$60.00	14
+269	Metal Muff	Distortion with Top Boost	$95.00	$65.00	14
+270	Muff Overdrive	Muff Fuzz Reissue	$45.00	\N	14
+271	Nano Big Muff Pi	Distortion/Fuzz/Overdrive	$73.00	$48.00	14
+272	Nano Operation Overlord	Overdrive/Distortion	$79.00	\N	14
+273	OD Glove	MOSFET Overdrive/Distortion	$68.00	$60.00	14
+274	Op-Amp Big Muff Pi	Distortion/Sustainer	$81.00	$72.00	14
+275	Operation Overlord	Allied Overdrive	$148.00	$100.00	14
+276	Ram's Head Big Muff Pi	Distortion/Sustainer	$100.00	$65.00	14
+277	Riddle	Evelope Filter	$198.00	$150.00	14
+278	Satisfaction	Fuzz	$60.00	$41.00	14
+279	Soul Food	Distortion/Fuzz/Overdrive	$87.00	$49.00	14
+280	Sovtek Deluxe Big Muff Pi	Distortion/Sustainer	$150.00	$112.00	14
+281	Triangle Big Muff Pi	Distortion/Sustainer	$100.00	$68.00	14
+282	Turnip Greens	Soul Food Overdrive + Holy Grail Max Reverb	$218.00	$172.00	14
+283	Blurst	Modulated Filter	$138.00	$111.00	14
+284	Doctor Q	Envelope Fillter	$51.00	$45.00	14
+285	Micro Q-Tron	Envelope Filter	$96.00	$83.00	14
+286	Q-Tron+	Envelope Filter	$168.00	\N	14
+287	Stereo Talking Machine	Vocal Formant Filter	$222.00	$220.00	14
+288	Analogizer	Preamps, EQ, and Tone Shaping	$72.00	$66.00	14
+289	Knockout	Attack Equalizer	$69.00	$60.00	14
+290	Signal Pad	Passive Attenuator	$46.00	$39.00	14
+396	Klon Replica 	Overdrive	\N	$310.00	22
+291	Cathedral	Stereo Reverb	$222.00	$135.00	14
+292	Holy Grail	Reverb	$122.00	$95.00	14
+293	Holy Grail Max	Reverb	$160.00	$130.00	14
+294	Holy Grail Neo	Reverb	$127.00	$90.00	14
+295	Holy Grail Plus	Variable Reverb	$148.00	$100.00	14
+296	Oceans 11	Reverb	$151.00	$123.00	14
+297	Oceans 12	Dual Stereo Reverb	$238.00	$200.00	14
+298	Stereo Pulsar	Variable Shape Analog Tremolo	$90.00	$80.00	14
+299	Super Pulsar	Stereo Tap Tremolo	$238.00	$185.00	14
+300	Iron Lung	Vocoder 	$144.00	$122.00	14
+301	V256	Vocoder 	$230.00	$189.00	14
+302	Voice Box	Vocal Harmony Machine/Vocoder	$230.00	$189.00	14
+303	Compugilist	Compressor/Distortion	$170.00	$120.00	18
+304	The Trapper	Dual Fuzz	$180.00	$139.00	18
+305	MTG	Tube Distortion	$200.00	$140.00	18
+306	MTG:LA	Tube Distortion	$200.00	$171.00	18
+307	Lost Highway	Phaser	$150.00	$100.00	18
+308	Tre-Verb	Digital Reverb/Tremolo	$270.00	$200.00	18
+309	The Pinwheel 	Rotary Speaker Emulator	$270.00	$200.00	18
+310	Pour Over	Envelope Filter	$150.00	\N	18
+311	Bubbler 	Analog Chorus	$150.00	$100.00	18
+312	Smolder	Acoustic Overdrive	$150.00	\N	18
+313	Marine Layer	Reverb	$170.00	$120.00	18
+314	Reflecting Pool 	Delay and Reverb	$300.00	\N	18
+315	Full Moon 	Distortion	$170.00	$100.00	18
+316	The Pelt	Fuzz	$150.00	$80.00	18
+317	Mirror Image	Delay	$170.00	$100.00	18
+318	Engager 	Boost	$110.00	$65.00	18
+319	Santa Ana 	Overdrive	$250.00	$155.00	18
+320	Level Set 	Buffer	$120.00	$69.00	18
+321	Pugilist 	Distortion	$120.00	$82.00	18
+322	The Bends	Compressor  	$150.00	$101.00	18
+323	TS Mini	Overdrive	$80.00	$58.00	20
+324	TS808DX	Overdrive	$250.00	$180.00	20
+325	TS808HWB	Overdrive	$380.00	\N	20
+326	TS808	Overdrive	$180.00	$110.00	20
+327	TS9	Overdrive	$100.00	$69.00	20
+328	TS9DX	Overdrive	$120.00	$70.00	20
+329	ES3 Echo Shifter	Hybrid Delay/Modulation	$200.00	$140.00	20
+330	FZ Mini	Fuzz	$90.00	$79.00	20
+331	AD Mini	Analog Delay	$120.00	$86.00	20
+332	CS Mini	Chorus	$120.00	$75.00	20
+333	TR Mini	Vintage Tremolo	$100.00	$74.00	20
+334	FL Mini	Flanger	$120.00	\N	20
+335	SM Mini	Metal Guitar	$120.00	$66.00	20
+336	OD850	Overdrive	$130.00	$100.00	20
+337	WH10V3	Wah	$150.00	$70.00	20
+338	Bonsai	Overdrive  	$230.00	$210.00	22
+339	Morning Glory	Overdrive	$200.00	$149.00	22
+340	AT+ Andy Timmons Signature	Overdrive	$220.00	$180.00	22
+341	Superbolt	Overdrive	$200.00	$125.00	22
+342	Moonshine	Overdrive	$200.00	$120.00	22
+343	Angry Charlie	Overdrive	$200.00	$120.00	22
+344	Charlie Brown	Overdrive	$200.00	$160.00	22
+345	Kilt StuG Signature	Overdrive/Fuzz/Distortion	$200.00	\N	22
+346	Twin Twelve	Overdrive/Preamp	$200.00	$150.00	22
+347	Double Barrel	Overdrive	$315.00	$230.00	22
+348	Sweet Tea	Overdrive/Distortion	$315.00	$180.00	22
+349	Bender - Legends of Fuzz Series	Distortion/Fuzz	$179.00	$155.00	22
+350	Crimson - Legends of Fuzz Series	Distortion/Fuzz	$179.00	$173.00	22
+351	Smiley - Legends of Fuzz Series	Distortion/Fuzz	$179.00	$160.00	22
+352	Supreme - Legends of Fuzz Series	Distortion/Fuzz	$179.00	$155.00	22
+353	Muffuletta	Distortion/Fuzz	$230.00	$185.00	22
+354	Cheese Ball	Distortion/Fuzz	$199.00	$148.00	22
+355	Crayon 	Preamp/Distortion/Fuzz	$199.00	$165.00	22
+356	Mini Foot Fuzz	Fuzz	$135.00	$80.00	22
+357	Unicorn 	Univibe/Vibrato	$199.00	$170.00	22
+358	Emperor	Chorus/Vibrato	$199.00	$182.00	22
+359	Kodiak	Tremolo	$199.00	$170.00	22
+360	Panther Cub	Delay	$299.00	$185.00	22
+361	Space Commander	Boost/Chorus/Reverb	$229.00	\N	22
+362	Tidewater	Tremolo 	$135.00	$108.00	22
+363	Colour Box	Preamp/EQ/Overdrive/Distortion/Fuzz/DI Box	$399.00	$335.00	22
+364	Clover	Preamp/EQ  	$199.00	$179.00	22
+365	Haunting Mids	Preamp/EQ	$149.00	$126.00	22
+366	Twin Twelve	Overdrive/Preamp	$199.00	$146.00	22
+367	Prestige	Buffer/Booster	$129.00	$104.00	22
+368	Lucky Cat	Delay	$199.00	$164.00	22
+369	Milkman	Slap Echo/Delay	$179.00	$150.00	22
+370	Pulp n' Peel 	Compressor/Preamp/DI Box	$230.00	$140.00	22
+371	Whitey Tighty	Compressor  	$135.00	$110.00	22
+372	Spring Tank	Reverb	$179.00	$149.00	22
+373	Little Black Amp Box	Volume Utility	$45.00	$45.00	22
+374	Little Black Buffer	Utility	$75.00	$49.00	22
+375	Buffered Splitter	Utility	$80.00	$75.00	22
+376	Mute Switch	Utility	$55.00	$44.00	22
+377	Summing Amp	Utility	$80.00	\N	22
+378	808	Overdrive	\N	$199.00	22
+379	Pollinator	Fuzz	\N	$135.00	22
+380	All American	Distortion  `	\N	$210.00	22
+381	4 Wheeler	Fuzz	\N	$139.00	22
+382	Astro Mess	Fuzz	\N	$155.00	22
+383	Banana Boost	Boost  	\N	\N	22
+384	Firefly	Fuzz	\N	$420.00	22
+385	Honey Comb 	Speed Tremolo	\N	$170.00	22
+386	Feedback Looper	Looper	\N	$181.00	22
+387	Pink Panther 	Delay	\N	$250.00	22
+388	73 Rams Head Replica	Fuzz	\N	$153.00	22
+389	Blender	Blender	\N	$70.00	22
+390	Ruby Red	Overdrive/Fuzz/Boost	$195.00	\N	22
+391	Calhoun	Overdrive/Fuzz  	$315.00	$190.00	22
+392	Bun Runner 	Fuzz	\N	$815.00	22
+393	Alpine	Reverb	\N	$249.00	22
+394	Warble Tron	Vibrato/Chorus	\N	$299.00	22
+395	State Line	Overdrive	\N	\N	22
+397	Steak N Eggs	Overdrive Compressor	\N	$267.00	22
+398	Panther Delay	Analog Delay	\N	$310.00	22
+399	Mr. Magic	Booster/Buffer/Enhancer	\N	$140.00	22
+400	Mini Bomb	Boost	\N	$110.00	22
+401	R-15	Preamp House	$157.00	$146.00	23
+402	R-14 	Atmosphere	$84.00	\N	23
+403	R-13	XVI	$90.00	$80.00	23
+404	R-12 	Band Controller	$75.00	\N	23
+405	R-10 	Nascar Delay	$59.00	\N	23
+406	R-11	Baatsin	$57.00	\N	23
+407	R-09	Vision	$80.00	\N	23
+408	R-08	Cab Box	$169.00	\N	23
+409	R-07	Aquarius	$76.00	\N	23
+410	R-06	O.M.B	$97.00	\N	23
+411	R-05 	Maximium	$54.00	$50.00	23
+412	R-04 	Zip Amp	$42.00	\N	23
+413	R-03	Uzi	$46.00	\N	23
+414	R-02	Taichi	$47.00	\N	23
+415	R-01	Tauren	$45.00	\N	23
+416	JF-332	Moonbase	$46.00	$43.00	23
+417	JF-330	Ocho	$55.00	\N	23
+418	JF-329	Ironloop	$62.00	$50.00	23
+419	JF-328	Nebulous	$46.00	\N	23
+420	Jf-327	Raptor Flanger	$50.00	\N	23
+421	JF-325	Molo-trem	$51.00	\N	23
+422	JF-324	Gate of Kahn	$54.00	$32.00	23
+423	JF-323	Wooden Sound	$54.00	$47.00	23
+424	JF-322	Wow Wah	$50.00	\N	23
+425	JF-321 	Bullet Metal	$53.00	$49.00	23
+426	JF-320	Purple Storm	$45.00	$39.00	23
+427	JF-319	Green Legend	$45.00	\N	23
+428	JF-318	Quattro	$55.00	$50.00	23
+429	JF-317	Space Verb	$55.00	$53.00	23
+430	JF-316	Future Chorus	$42.00	\N	23
+431	JF-315	MetalHead	$51.00	\N	23
+432	JF-314	Husky Drive	$51.00	$40.00	23
+433	JF-313	Old School	$51.00	$28.00	23
+434	JF-312	Pipebomb	$51.00	\N	23
+435	JF-311	Blue Rain	$51.00	$50.00	23
+436	JF-310	Orange Juice	$51.00	$50.00	23
+437	JF-309 	Boogie Master	$43.00	$39.00	23
+438	JF-308	Golden Face	$51.00	$50.00	23
+439	JF-307	Clean Glass	$51.00	$49.00	23
+440	JF-306	Rushing Train	$49.00	$40.00	23
+441	JF-305	AT Drive	$43.00	$25.00	23
+442	JF-304 	Time Magic	$54.00	\N	23
+443	JF-303	Little Blaster	$43.00	$42.00	23
+444	JF-302	Wild Boost	$41.00	$35.00	23
+445	JF-301	Rated Boost	$51.00	$40.00	23
+446	JF-39	Deluxe Crunch	\N	$25.00	23
+447	JF-38	Roll Boost	$46.00	$30.00	23
+448	JF-37	Analog Chorus	$38.00	$30.00	23
+449	JF-36	Sweet Baby	$40.00	$35.00	23
+450	JF-35	Pocket Metal	\N	$32.00	23
+451	JF-34	US Dream	$40.00	$20.00	23
+452	JF-33	Analog Delay	$37.00	$27.00	23
+453	JF-32	Hot Plexi	\N	$35.00	23
+454	JF-31	Noise Gate	$40.00	$36.00	23
+455	JF-30	A/B Switch	\N	$35.00	23
+456	JF-17	Extreme Metal	$43.00	$40.00	23
+457	JF-16	British Sound	\N	$32.00	23
+458	JF-15	California Sound	$40.00	$35.00	23
+459	JF-14	American Sound	$44.00	$20.00	23
+460	JF-13	AC Tone	$42.00	$38.00	23
+461	JF-12	Voodoo Octave	$39.00	\N	23
+462	JF-11 	6 Band EQ	$38.00	$35.00	23
+463	JF-10 	Dynamic Compressor	$38.00	$20.00	23
+464	JF-09	Tremolo	$38.00	$30.00	23
+465	JF-08	Digital Delay	\N	$34.00	23
+466	JF-07	Classic Flanger	$35.00	$30.00	23
+467	JF-06	Vintage Phase	\N	$32.00	23
+468	JF-05 	Classic Chorus	$38.00	$35.00	23
+469	JF-04	High Gain Distortion	$38.00	$36.00	23
+470	JF-03	Crunch Distortion	\N	$36.00	23
+471	JF-02	Ultimate Drive	$35.00	$25.00	23
+472	JF-01	Vintage Drive	$35.00	$30.00	23
+473	JDI-01	\N	$40.00	\N	23
+474	JF-MK	Lion's Roar	$50.00	\N	23
+475	D-Seed II	Dual Channel Digital Delay	$87.00	\N	23
+476	D-Seed I	Dual channel Digital Delay	\N	\N	23
+477	AD-2	Acoustic Preamp/DI Box	$69.00	\N	23
+478	WAH-I	Classic Wah	$58.00	\N	23
+479	WAH-II	Multimode Wah	$70.00	\N	23
+480	D7 	Delay	$105.00	$70.00	30
+481	A7 	Ambience Reverb	$175.00	$110.00	30
+482	E7	Polyphonic Guitar Synth	$90.00	$86.00	30
+483	Tone Capture GTR	Intelligent EQ Match	$80.00	$74.00	30
+484	Groove Loop 	Drum Machine and Looper	$77.00	$74.00	30
+485	Mod Factory MKII	Multi Modulation	$71.00	$70.00	30
+486	Radar	Speaker Cab Simulator	$120.00	$115.00	30
+487	Tender Octave MKII	Octaver	$71.00	$68.00	30
+488	Triangolo	Digital Tremolo	$71.00	$68.00	30
+489	Jet Engine	Flanger	$63.00	$57.00	30
+490	Modverb	Modulation and Reverb	$62.00	$55.00	30
+491	Echoverb	Delay and Reverb	$70.00	$55.00	30
+492	Micro Drummer	Drum Machine	$71.00	$63.00	30
+493	aWah	Auto Wah	$60.00	$58.00	30
+494	Envelope 	Auto Wah	$58.00	$50.00	30
+495	Liquid 	Phaser	$63.00	$57.00	30
+496	Babywater	Delay and Reverb	$58.00	\N	30
+497	Varimolo	Tremolo	$57.00	$54.00	30
+498	Trescab	Cabinet Simulator	$68.00	$53.00	30
+499	Woodverb	Reverb	$63.00	\N	30
+500	Soul Shiver	Modulation  	$59.00	$51.00	30
+501	Micro Looper	Looper	$67.00	$62.00	30
+502	Micro Buffer	Buffer 	$45.00	\N	30
+503	Slow Engine	Slow Motion Pedal	$65.00	$60.00	30
+504	Skyverb	Reverb	$64.00	$57.00	30
+505	Yellow Comp	Compressor	$52.00	$52.00	30
+506	Noise Killer	Noise Gate	$58.00	$54.00	30
+507	Ultra Drive MKII	Distortion	$63.00	$52.00	30
+508	Repeater	Delay	$59.00	$56.00	30
+509	Graphic G 	5-Band Guitar EQ	$59.00	$51.00	30
+510	Funky Monkey	Auto Wah	$63.00	$53.00	30
+511	Solo	Distortion	$58.00	$47.00	30
+512	Acoustikar	Acoustic Guitar Simulator	$62.00	$49.00	30
+513	Lofi Machine	Sample Reducing	$63.00	$59.00	30
+514	Rumble Drive	Overdrive	$88.00	$73.00	30
+515	Echolizer	Delay	$56.00	$51.00	30
+516	Blues Mood	Overdrive	$53.00	$52.00	30
+517	Pure Octave	Octaver	$67.00	$45.00	30
+518	Pure Boost	Clean Boost	$51.00	$36.00	30
+519	Reecho	Delay	$59.00	$53.00	30
+520	Flexboost	Booster	$34.00	\N	30
+521	Rage Machine	Distortion	$57.00	$47.00	30
+522	Triangle Buff	Fuzz	$68.00	$47.00	30
+523	E-Lady	Flanger	$60.00	\N	30
+524	Trelicopter	Tremolo	$70.00	$47.00	30
+525	Ninety Orange	Phaser	$51.00	$50.00	30
+526	Blues Crab	Overdrive	$54.00	\N	30
+527	Pitchbox	Pitch	$63.00	\N	30
+528	Shimverb	Reverb	$59.00	$46.00	30
+529	Shimverb Pro	Stereo Reverb	$100.00	\N	30
+530	Cruncher	Distortion	$51.00	$44.00	30
+531	Ana Echo	Delay	$58.00	$48.00	30
+532	Blade	Distortion	$47.00	$45.00	30
+533	Black Secret	Distortion	$55.00	$47.00	30
+534	Hustle Drive	Distortion	$54.00	$47.00	30
+535	Ensemble King	Analog Chorus	$52.00	$45.00	30
+536	Green Mile 	Overdrive	$58.00	$46.00	30
+537	Mod Factory Pro	Dual Engine Modulation	$120.00	\N	30
+538	Tender Octaver Pro	Octaver	$119.00	$107.00	30
+539	M233 Micro Amp+	Boost/EQ	$120.00	$60.00	32
+540	M133 Micro Amp 	Boost	$80.00	$54.00	32
+541	MC401 Cae Boost/Line Driver	Booster	$100.00	$65.00	32
+542	MC402 Cae Boost/Overdrive	Boost/Overdrive	$140.00	$100.00	32
+543	MC406 Cae Buffer	Buffer	$100.00	$90.00	32
+544	EVH30 Chorus	Chorus	$200.00	$160.00	32
+545	M234 Analog Chorus	Analog chorus	$100.00	$71.00	32
+546	M68 Uni-Vibe	Chorus/Vibrato	$130.00	$99.00	32
+547	M148 Micro Chorus	Chorus	$90.00	$51.00	32
+548	M134 Stereo Chorus	Stereo Chorus	$170.00	$122.00	32
+549	M228 Dyna Comp Deluxe	Compressor	$130.00	$82.00	32
+550	M291 Dyna Comp Mini	Compressor	$100.00	$81.00	32
+551	M102 Dyna Comp	Compressor	$80.00	$60.00	32
+552	M132 Super Comp	Compressor	$90.00	$50.00	32
+553	CSP102SL Script Dyna Comp	Compressor	$140.00	$100.00	32
+554	M76 Studio Compressor	Compressor	$190.00	$134.00	32
+555	M299 Carbon Copy Mini	Analog Delay	$150.00	\N	32
+556	M292 Carbon Copy Deluxe 	Analog Delay	$230.00	\N	32
+557	M169 Carbon Copy 	Analog Delay	$150.00	$100.00	32
+558	M169A Carbon Copy 10th Anniversary Edition	Analog Delay	\N	$100.00	32
+559	M75 Super Bad*** 	Distortion	$100.00	$60.00	32
+560	DD11 Dime Distortion	Distortion	$130.00	$85.00	32
+561	M116 Fullbore Metal Distortion	Distortion	$100.00	$69.00	32
+562	M78 Custom Bad*** '78 	Distortion	$80.00	$45.00	32
+563	M104 Distortion+	Distortion	$80.00	$52.00	32
+564	M115 Distortion III	Distortion	$80.00	$40.00	32
+565	M109S Six Band EQ	EQ	$90.00	$65.00	32
+566	M108S Ten Band EQ	EQ	$130.00	$92.00	32
+567	M152 Micro Flanger	Flanger	$90.00	\N	32
+568	M117R Flanger	Flanger	$170.00	$129.00	32
+569	M296 Classic 108 Fuzz Mini	Fuzz	$100.00	$77.00	32
+570	M236 Super Bad*** Variac Fuzz	Fuzz	$130.00	$110.00	32
+571	M103 Blue Box	Fuzz	$80.00	$70.00	32
+572	SF01 Slash Octave Fuzz	Fuzz	$150.00	$120.00	32
+573	M173 Classic 108 Fuzz	Fuzz	$130.00	$93.00	32
+574	M225 Sub Machine	Fuzz	$150.00	$120.00	32
+575	M135 Smart Gate	Noise Gate	$130.00	$60.00	32
+576	M195 Noise Clamp	Noise Gate	$90.00	$65.00	32
+577	DD25V2 Dookie Drive V2	Overdrive	$190.00	\N	32
+578	CSP037 Raijin' Drive	Overdrive	$130.00	$70.00	32
+579	M294 Sugar Drive	Overdrive	$120.00	$90.00	32
+580	EVH5150 Overdrive	Overdrive	$200.00	$120.00	32
+581	M250 Double-Double	Overdrive	$100.00	$75.00	32
+582	M77 Custom Bad*** Modified OD	Overdrive	$100.00	$50.00	32
+583	EVH5150K Overdrive Katakana	Overdrive	$200.00	\N	32
+584	M193 GT-OD	Overdrive	$100.00	$75.00	32
+585	M267 Octavio	Fuzz	$130.00	$100.00	32
+586	CSP027 Timmy 	Overdrive	$130.00	$118.00	32
+587	DD25V3 Dookie Drive V3	Overdrive	\N	$158.00	32
+588	CSP038 Brown Acid	Fuzz	$150.00	$110.00	32
+589	M303 Clone Looper	Looper	$150.00	$95.00	32
+590	EVH 30 Chorus	Chorus	$200.00	$160.00	32
+591	M300 Reverb	Reverb	$200.00	$120.00	32
+592	ILD169 Carbon Copy 	Analog Delay	$100.00	\N	32
+593	M101 Phase 90	Phaser	$80.00	$54.00	32
+594	M290 Phase 95	Phaser	$100.00	$72.00	32
+595	EVH117 Flanger	Flanger	$190.00	\N	32
+596	CSP026 '74 Vintage Phase 90	Phaser	$130.00	$110.00	32
+597	CSP105 '75 Vintage Phase 45	Phaser	$100.00	$80.00	32
+598	M222 Talk Box	Talk Box	$170.00	$98.00	32
+599	CSP101SL Script Phase 90 - LED	Phaser	$100.00	$96.00	32
+600	M107 Phase 100	Phaser	$120.00	$100.00	32
+601	EVH Phase 90	Phaser	$130.00	$85.00	32
+602	Deputy Marshal	Plexi Distortion	$55.00	$50.00	36
+603	Widow Maker	Metal Distortion	$49.00	$47.00	36
+604	Cactus Juice	2-Mode Overdrive	$55.00	$48.00	36
+605	Dumbleweed 	D-Style Amp Overdrive	$55.00	$45.00	36
+606	Dead Man's Hand	2-Mode Overdrive	$55.00	$42.00	36
+607	Hangman 	Overdrive	$55.00	$49.00	36
+608	The General	Germanium Fuzz	$55.00	$49.00	36
+609	Five O'Clock	Fuzz	$55.00	$40.00	36
+610	Boilermaker 	Boost	$59.00	$40.00	36
+611	Vigilante	Chorus	$59.00	$30.00	36
+612	Phunnel Cloud	Phaser	$55.00	$49.00	36
+613	Rocker Box	Tremolo	$55.00	$45.00	36
+614	Eldorado	Echo	$79.00	$66.00	36
+615	Quick Draw	Delay	$59.00	$40.00	36
+616	24K 	Reverb	$89.00	$56.00	36
+617	Wrangler	Compressor	$59.00	$52.00	36
+618	Late Riser	Auto Volume Swell	$79.00	$66.00	36
+619	Lasso 	Looper	$89.00	$71.00	36
+620	Turbo RAT	Distortion	$120.00	$97.00	38
+621	You Dirty RAT	Distortion	$120.00	$94.00	38
+622	Fat RAT	Distortion	$160.00	$140.00	38
+623	Solo	Distortion	$150.00	\N	38
+624	Deucetone RAT	Distortion	$229.00	$190.00	38
+625	Ditto X4 Looper	Looper	$300.00	$170.00	43
+626	Ditto Jam X2 Looper	Looper	$199.00	$156.00	43
+627	Ditto Stereo Looper	Looper	$129.00	\N	43
+628	Ditto X2 Looper	Looper	$179.00	$120.00	43
+629	Ditto+ Looper	Looper	$130.00	\N	43
+630	Sentry	Noise Gate	$130.00	$80.00	43
+631	Hypergravity	Compressor	$129.00	$90.00	43
+632	Hypergravity Mini	Compressor	$79.00	$68.00	43
+633	Forcefield 	Compressor	$50.00	$36.00	43
+634	Iron Curtain 	Noise Gate	$49.00	\N	43
+635	Crescendo 	Auto Swell	$69.00	\N	43
+636	Bodyrez	Acoutis Pickup Enhancer	$99.00	$75.00	43
+637	Hall of Fame 2	Reverb	$149.00	$110.00	43
+638	Flashback 2	Delay	$169.00	$100.00	43
+639	Flashback 2 X4	Delay	$249.00	$190.00	43
+640	Skysurfer	Reverb	$69.00	$40.00	43
+641	Hall of Fame 2 X4	Reverb	$300.00	$240.00	43
+642	The Prophet	Digital Delay	$69.00	$39.00	43
+643	Hall of Fame Mini	Reverb	$100.00	$68.00	43
+644	Echobrain	Analog Delay	$69.00	$36.00	43
+645	Flashback Mini	Delay	$100.00	$75.00	43
+646	Flashback 2 Mini	Delay	$119.00	$100.00	43
+647	Hall of Fame Mini 2	Reverb	$120.00	\N	43
+648	Flourescence 	Shimmer Reverb	$100.00	\N	43
+649	Drip 	Spring Reverb	$100.00	$80.00	43
+650	Gauss	Tape Echo	$80.00	\N	43
+651	ND-1 Nova 	Delay	\N	$125.00	43
+652	Flashback Triple Delay	Delay	$299.00	$180.00	43
+653	Alter Ego X4	Vintage Echo	\N	$192.00	43
+654	Flashback X4 	Delay	$250.00	$150.00	43
+655	Alter Ego 2 	Vintage Echo	$170.00	$125.00	43
+656	Arena	Reverb	\N	$89.00	43
+657	Flashback	Delay	$170.00	$88.00	43
+658	Hall of Fame	Reverb	$145.00	$87.00	43
+659	Trinity	Reverb	\N	$142.00	43
+660	Spark Mini	Booster	$50.00	$41.00	43
+661	Spark 	Booster	$130.00	$100.00	43
+662	MojoMojo 	Overdrive	$49.00	$38.00	43
+663	Rusty Fuzz	Fuzz	$49.00	$37.00	43
+664	Dark Matter	Distortion	$50.00	$40.00	43
+665	Cinders	Overdrive	$49.00	$30.00	43
+666	Tube Pilot 	Overdrive	$59.00	$50.00	43
+667	Honey Pot	Fuzz	$58.00	\N	43
+668	Fangs Metal	Distortion	\N	$106.00	43
+669	Eyemaster Metal	Distortion	$58.00	\N	43
+670	Rush Booster	Clean Boost	$70.00	$30.00	43
+671	El Cambo	Overdrive	$60.00	\N	43
+672	Grand Magus	Distortion	$49.00	$40.00	43
+673	June-60	Stereo Chorus	$59.00	$40.00	43
+674	Sub 'N' Up	Octaver	$129.00	$115.00	43
+675	3rd Dimension	Analog Chorus	$69.00	$43.00	43
+676	Afterglow	Chorus	$69.00	$39.00	43
+677	Choka	Tremolo	$50.00	$38.00	43
+678	Corona Mini	Chorus	$118.00	$65.00	43
+679	Brainwaves	Pitch Shifter	$180.00	$130.00	43
+680	Blood Mooon 	Phaser	$58.00	$37.00	43
+681	Nether 	Octaver	$58.00	$38.00	43
+682	Viscous	Vibe	$150.00	$70.00	43
+683	Pipeline	Tap Tremolo	$129.00	$105.00	43
+684	Corona  	Chorus	$129.00	$76.00	43
+685	The Dreamscape	Modulation Multi-Effects	$169.00	$110.00	43
+686	Helix	Phaser	$129.00	$75.00	43
+687	Thunderstorm 	Flanger	$69.00	$40.00	43
+688	Vibraclone Rotary	Rotary Speaker	$70.00	\N	43
+689	Sub 'N' Up Mini 	Octaver	$99.00	$69.00	43
+690	Tailspin	Vibrato	$50.00	\N	43
+691	Vortex	Flanger	$129.00	$78.00	43
+692	Vortex Mini	Flanger	$100.00	$60.00	43
+693	Shaker Mini	Vibrato	$99.00	$80.00	43
+694	Shaker	Vibrato	$129.00	$60.00	43
+695	Corona Chorus + Trichorus & Toneprint	Chorus	\N	$230.00	43
+696	Wiretap 	Riff Recorder	$69.00	$47.00	43
+697	MIMIQ Doubler	Doubler	$150.00	$75.00	43
+698	Bonafide Buffer	Analog Buffer	$79.00	$45.00	43
+699	Aeon	Sustainer	$69.00	$50.00	43
+700	MIMIQ Mini Doubler	Doubler	$79.00	$70.00	43
+701	El Mocambo	Overdrive	$58.00	$55.00	43
+702	V3 H2O	Chorus and Echo	$179.00	$150.00	45
+703	V3 Route 66	Overdrive and Compression	$179.00	$130.00	45
+704	V3 VS-XO 	Dual Overdrive	$179.00	$105.00	45
+705	Visual Volume	Volume Pedal	$179.00	$105.00	45
+706	Custom Shop Overdrive	Overdrive	\N	\N	45
+707	V3 Dual Tap Delay	Delay	$208.00	\N	45
+708	V3 Tap Delay	Delay	$435.00	\N	45
+709	V2 Angry Fuzz	Fuzz	\N	$72.00	45
+710	V2 Comp 66	Compressor	\N	$60.00	45
+711	V2 Double Trouble	Overdrive	\N	$75.00	45
+712	V2 H2O 	Chorus and Echo	\N	$90.00	45
+713	V2 Jekyll and Hyde	Overdrive and Distortion	$230.00	$85.00	45
+714	V2 Liquid Chorus	Chorus  	$235.00	$130.00	45
+715	 V2 Open Road	Overdrive	\N	$82.00	45
+716	V2 Route 808 	Overdrive	\N	$70.00	45
+717	V2 Route 66	Overdrive and Compression	$150.00	$51.00	45
+718	V2 Son of Hyde	Distortion	$205.00	$70.00	45
+719	V2 Truetone Clean Boost	Boost	$154.00	$50.00	45
+720	V2 Van's Warped Distortion	Distortion	$170.00	$142.00	45
+721	GarageTone Drivetrain	Overdrive	\N	$48.00	45
+722	GarageTone Oil Can	Phaser	\N	$52.00	45
+723	GarageTone Axle Grease	Delay	\N	$89.00	45
+724	GarageTone Chainsaw	Distortion	$102.00	$45.00	45
+725	GarageTone Tremolo	Tremolo	\N	$50.00	45
+726	Cutting Edge	Distortion	$294.00	\N	47
+727	Mystic Edge	Overdrive/Distortion	$295.00	\N	47
+728	Silk Drive	Overdrive 	$294.00	\N	47
+729	V845	Wah	$80.00	$46.00	47
+730	V846-HW	Wah	$220.00	$150.00	47
+731	V847	Wah	$100.00	$50.00	47
+732	V847-C	Wah	$230.00	\N	47
+733	WHE406 Conquistador	Fuzz/Distortion	$150.00	$86.00	50
+734	WHE702S Echo-Puss	Analog Delay	$170.00	$135.00	50
+735	WHE207 Green Rhino	Overdrive	$130.00	$70.00	50
+736	WHE103 Saffron Squeeze	Compressor	$150.00	$104.00	50
+737	WM71 Aqua Puss	Analog Delay	$150.00	\N	50
+738	WM61 Blue Hippo	Analog Chorus	$150.00	\N	50
+739	WM20 Conspiracy Theory Professional	Overdrive	$130.00	$100.00	50
+740	WM28 Overrated Special	Overdrive	$170.00	$143.00	50
+741	WM91 Pork and Pickle	Overdrive and Fuzz	$170.00	$143.00	50
+742	WM42 Russian Pickle 	Fuzz  	$150.00	$120.00	50
+743	WM31 Supa-Lead	Overdrive	$130.00	$90.00	50
+744	WM41 Swollen Pickle	Fuzz	$130.00	$79.00	50
+745	WHE707 Supa-Puss	Analog Delay	$250.00	$175.00	50
+746	WHE401S Swollen Pickle Jumbo	Fuzz	$130.00	$75.00	50
+747	WHE205 Saucy Box	Overdrive	$130.00	$80.00	50
+749	AM300	Acoustic Modeler	\N	$40.00	5
+750	AM400	Acoustic Modeler	\N	$45.00	5
+751	BO100	Overdrive	\N	$88.00	5
+752	BO300	Overdrive	\N	\N	5
+753	CC300	Chorus Space-C	\N	$71.00	5
+754	CD400	Chorus Space-D	\N	$67.00	5
+755	CL9	Compressor/Limiter	\N	$28.00	5
+756	CO600	Chorus Orchestra	\N	$61.00	5
+757	CS100	Compressor/Sustainer	\N	$75.00	5
+758	CS400	Compressor/Sustainer	\N	$28.00	5
+759	DC9	Dynamic Compressor	\N	$100.00	5
+760	DD100	Digital Delay	\N	$108.00	5
+761	DD400	Digital Delay	\N	$62.00	5
+762	DD600	Digital Delay	\N	$81.00	5
+763	DM100	Distortion Modeler	\N	$21.00	5
+764	DR100	Digital Reverb	\N	$52.00	5
+765	DR600	Digital Reverb	\N	$25.00	5
+766	DR400	Digital Reverb/Delay	\N	\N	5
+767	DW400	Dynamic Wah/Human Voice	\N	\N	5
+768	EM600	Echo Machine	\N	$182.00	5
+769	EQ700	Graphic EQ	\N	$28.00	5
+770	FD300	Ultra Feedback/Distortion	\N	\N	5
+771	FL600	Flanger Machine	\N	\N	5
+772	FM600	Filter Machine	\N	\N	5
+773	FX100	Digital Multi-Effects	\N	$115.00	5
+774	FX600	Digital Multi-Effects	\N	$48.00	5
+775	GDI21	Amp Modeler/Driver/DI Box	\N	$33.00	5
+776	HB01	Hellbabe Optical Wah	\N	$34.00	5
+777	HD300	Heavy Distortion	\N	$70.00	5
+778	HF300	Hi Band Flanger	\N	$108.00	5
+779	HM300	Heavy Metal Distortion	\N	$28.00	5
+780	IG9	Intelligent Noise Gate	\N	\N	5
+781	NR100	Noise Reducer	\N	$100.00	5
+782	NR300	Noise Reducer	\N	$20.00	5
+783	OD100	Overdrive/Distortion	\N	$37.00	5
+784	OD300	Overdrive/Distortion	\N	$28.00	5
+785	OD400	Overdrive	\N	$63.00	5
+786	PB100	Preamp Booster	\N	$67.00	5
+787	PH9	Classic 90 Degree PhaseShifter	\N	\N	5
+788	PO300	Power Overdrive	\N	$91.00	5
+789	RM600	Rotrary Machine	\N	$105.00	5
+790	RV600	Reverb Machine	\N	$75.00	5
+791	SE200	Spectrum Enhancer	\N	$98.00	5
+792	SF300	Super Fuzz	\N	$29.00	5
+793	SF400	Super Flanger	\N	$85.00	5
+794	SM200	Slow Motion/Attack Effects	\N	$74.00	5
+795	SM400	Super Metal	\N	\N	5
+796	SO400	Super Octaver	\N	$65.00	5
+797	SP400	Super Phase Shifter	\N	\N	5
+798	TM300	Tube Amp Modeling	\N	$28.00	5
+799	TO100	Tube Overdrive	\N	$30.00	5
+800	TO800	Vintage Tube Overdrive	\N	$20.00	5
+801	TP300	Ultra Tremolo/Pan	\N	$59.00	5
+802	UC100	Ultra Chorus	\N	\N	5
+803	UC200	Ultra Chorus	\N	$28.00	5
+804	UD100	Ultra Distortion	\N	$70.00	5
+805	UD300	Ultra Distortion	\N	$138.00	5
+806	UF100	Ultra Flanger	\N	$80.00	5
+807	UF300	Ultra Flanger	\N	\N	5
+808	UM100	Ultra Metal Distortion	\N	$55.00	5
+809	UM300	Ultra Metal Distortion	\N	$20.00	5
+810	UO100	Ultra Octaver	\N	$40.00	5
+811	UO300	Ultra Octaver	\N	$46.00	5
+812	UP100	Ultra Phase Shifter	\N	$55.00	5
+813	UP300	Ultra Phase Shifter	\N	\N	5
+814	US600	Ultra Shifter/Harmonist	\N	$90.00	5
+815	UT100	Ultra Tremolo  	\N	$65.00	5
+816	UT300	Ultra Tremolo	\N	$28.00	5
+817	UV300	Ultra Vibrato	\N	$28.00	5
+818	UZ400	Ultra Fuzz	\N	$80.00	5
+819	VD1	Vintage Distortion	\N	$71.00	5
+820	VD400	Vintage Delay	\N	$28.00	5
+821	VM1	Vintage Time Machine Delay	\N	$122.00	5
+822	VP1	Vintage Phaser	\N	$33.00	5
+823	VT911	Vintage Tube Overdrive	\N	$65.00	5
+824	VT999	Vintage Tube Monster	\N	$80.00	5
+825	WD300	Ultimate Wrap Distortion	\N	\N	5
+826	XD300	Distortion X	\N	\N	5
+\.
+
+
+--
+-- Data for Name: alembic_version; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.alembic_version (version_num) FROM stdin;
+e876d80c1564
+\.
+
+
+--
+-- Name: Manufacturer_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."Manufacturer_id_seq"', 52, true);
+
+
+--
+-- Name: Pedal_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."Pedal_id_seq"', 826, true);
+
+
+--
+-- Name: Manufacturer Manufacturer_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Manufacturer"
+    ADD CONSTRAINT "Manufacturer_pkey" PRIMARY KEY (id);
+
+
+--
+-- Name: Pedal Pedal_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Pedal"
+    ADD CONSTRAINT "Pedal_pkey" PRIMARY KEY (id);
+
+
+--
+-- Name: alembic_version alembic_version_pkc; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.alembic_version
+    ADD CONSTRAINT alembic_version_pkc PRIMARY KEY (version_num);
+
+
+--
+-- Name: Pedal Pedal_manufacturer_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Pedal"
+    ADD CONSTRAINT "Pedal_manufacturer_id_fkey" FOREIGN KEY (manufacturer_id) REFERENCES public."Manufacturer"(id) ON DELETE CASCADE;
+
+
+--
+-- PostgreSQL database dump complete
+--
+
