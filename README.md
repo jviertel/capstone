@@ -81,5 +81,8 @@ Models for the database are in models.py. The model classes also contain methods
 
 - manufacturer_id: foreign key, relates to id in Manufacturer table
 
+## API Endpoints
+
+
 
 
