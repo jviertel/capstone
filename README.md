@@ -56,5 +56,30 @@ http://pedalsdb.herokuapp.com/
 
 Note: As noted above, there is no frontend yet for this api, so please test using the steps provided below. 
 
+## Models
+Models for the database are in models.py. The model classes also contain methods for database actions used elesewhere in the codebase. The models are as follows:
+
+#### Manufacturer
+
+- id: primary key, auto increments, unique identifier for Manufacturer rows relates to the manufacturer_id column foreign key in the Pedals table
+
+- name: string, name of the manufacturer
+
+- website_link: string, url of the manufacturer's website
+
+### Pedal
+
+- id: primary key, auto increments, unique identifier for Pedal rows
+
+- name: string, name of the pedal
+
+- type: string, pedal effect type
+
+- new_price: string, new price for the pedal, may be empty if pedal if not currently in production
+
+- used_price: string, used price for pedal, may be empty if pedal is brand new or used price is not lower than new price
+
+- manufacturer_id: foreign key, relates to id in Manufacturer table
+
 
 
