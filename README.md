@@ -110,5 +110,38 @@ Note: The test_app.py file contains tokens that are required for the tests to ru
 - DELETE /manufacturers/<manufacturer_id>
 - DELETE /pedals/<pedal_id>
 
+#### GET /manufacturers
+- Public endpoint
+- Gets all manufacturers
+- Returns JSON with list of manufacturers, number of manufacturers, and success value
 
+Note: For simplicity, one manufacturer listing is shown in the manufacturers array here and in all of endpoint exapmles so user can get the idea of what the representation of the manufacturer data looks like without cluttering the example. 
+Example Return 
+
+{'manufacturers': [{"id":4,"name":"BBE","website_link":"http://www.bbesound.com/"}], "num_manufacturers":3,"success":true}
+
+#### GET /manufacturers/<manufacturer_id>/pedals
+- Public endpoint
+- Gets pedals for the given manufacturer_id
+- Returns JSON with manufacturer id, name of manufacturer, pedals array for given manufacturer, num of pedals for manufacturer, and success value
+
+Note: Again here, one pedal listing is shown in pedals array for simplicity, but to still convey what the data representation looks like
+Example Return
+
+{"manufacturer_id":4,"manufacturer_name":"BBE","num_pedals":2,"pedals":[{"id":1,"manufacturer_id":4,"name":"Soul Vibe SV-74","new_price":"$140.00","pedal_type":"Rotary Speaker Simulator","used_price":"$64.00"}],"success":true}
+
+#### POST /manufacturers
+- Requires post:manufacturers permission (held by the Contributor and Site Owner users)
+- Takes JSON with name of manufacturer and website link
+-Prevents duplicate entries
+
+Ex. 
+
+{'name': 'Volcanic Audio', 'website_link': 'https://www.volcanicaudio.com'})
+
+- Returns JSON with created manufacturer, manufacturers array, number of manufacturers, and success value
+
+Example Return
+
+{'created_manufacturer': 53, 'manufacturers': [{"id":4,"name":"BBE","website_link":"http://www.bbesound.com/"}], 'num_manufacturers': 53, 'success': True}
 
