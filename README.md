@@ -132,16 +132,82 @@ Example Return
 
 #### POST /manufacturers
 - Requires post:manufacturers permission (held by the Contributor and Site Owner users)
+- Creates new manufacturer
 - Takes JSON with name of manufacturer and website link
 -Prevents duplicate entries
 
 Ex. 
 
-{'name': 'Volcanic Audio', 'website_link': 'https://www.volcanicaudio.com'})
+{'name': 'Volcanic Audio', 'website_link': 'https://www.volcanicaudio.com'}
 
-- Returns JSON with created manufacturer, manufacturers array, number of manufacturers, and success value
+- Returns JSON with created manufacturer id, manufacturers array, number of manufacturers, and success value
 
 Example Return
 
-{'created_manufacturer': 53, 'manufacturers': [{"id":4,"name":"BBE","website_link":"http://www.bbesound.com/"}], 'num_manufacturers': 53, 'success': True}
+{'created_manufacturer': 53, 'manufacturers': [{"id":4,"name":"BBE","website_link":"http://www.bbesound.com/"}], 'num_manufacturers': 53, 'success':  True}
 
+#### POST /pedals
+- Requires post:pedals permission (held by Contributor and Site Owner users)
+- Creates new pedal
+- Takes JSON with name of pedal, pedal type, new price, used price, and manufacturer id
+- Prevents duplicate entries
+
+Ex. 
+
+{'name': 'California Surf', 'pedal_type': 'Reverb', 'new_price': '$99.00', 'used_price': '$65.00', 'manufacturer_id': 37}
+
+- Returns JSON with created pedal id, pedals array, number of pedals, and success value
+
+Example Return
+
+{'created_pedal': 847, 'pedals': [{"id":1,"manufacturer_id":4,"name":"Soul Vibe SV-74","new_price":"$140.00","pedal_type":"Rotary Speaker Simulator","used_price":"$64.00"}], 'num_pedals': 847, 'success': False}
+
+#### PATCH /maufacturers/<manufacturer_id>
+- Requires patch:manufacturers permission (held by Site Owner user)
+- Updates manufacturer's data for manufacturer with manufacturer_id
+- Takes JSON with manufacturer name and manufacturer website url
+
+Ex. 
+
+{'name': 'Changed Name','website_link': 'https://www.pedals.info.com'}
+
+- Returns JSON with patched manufacturer's id, manufacturer array, number of manufacturers, and success value
+
+Example Return
+
+{'updated_manufacturer': 4, 'manufacturers': [{"id":4,"name":"BBE","website_link":"http://www.bbesound.com/"}], 'num_manufacturers': 56, 'success': True}
+
+#### PATCH /pedals/<pedal_id>
+- Requires patch:pedals permission (held by Site Owner user)
+- Updates data for pedal with id of pedal_id
+- Takes JSON with pedal name, pedal type, new price, used price, and manufacturer_id
+
+Ex. 
+
+{'name': 'Pedal X', 'pedal_type': 'Chorus', 'new_price': '$95.00', 'used_price': '$55.00', 'manufacturer_id': 7}
+
+- Returns JSON with updated pedal's id, pedal array, number of pedals, and success value
+
+Example Return
+
+{'updated_pedal': 473, 'pedals': [{"id":1,"manufacturer_id":4,"name":"Soul Vibe SV-74","new_price":"$140.00","pedal_type":"Rotary Speaker Simulator","used_price":"$64.00"}], 'num_pedals': 849, 'success': True}
+
+#### DELETE /manufacturers/<manufacturer_id>
+- Requires delete:manufacturers permission (held by Site Owner user)
+- Deletes manufacturer with id of manufacturer_id
+- Returns JSON with deleted manufacturer's id, manufacturers array, number of manufacturers, and success value
+
+Example Return
+
+{'deleted_manufacturer': 5, 'manufacturers': [{"id":4,"name":"BBE","website_link":"http://www.bbesound.com/"}], 'num_manufacturers': 56, 'success': True}
+
+#### DELETE /pedals/<pedal_id>
+- Requires delete:pedals permission (held by Site Owner user)
+- Delete pedal with id of pedal_id
+- Returns JSON with deleted pedal's id, pedals array, num of pedals, and success value
+
+Example Return
+
+{'deleted_pedal': 352, 'pedals': [{"id":1,"manufacturer_id":4,"name":"Soul Vibe SV-74","new_price":"$140.00","pedal_type":"Rotary Speaker Simulator","used_price":"$64.00"}], 'num_pedals': 848, 'success': True}
+
+## Authentication
