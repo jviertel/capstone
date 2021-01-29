@@ -43,7 +43,8 @@ def create_app(test_config=None):
 
     @app.route('/manufacturers', methods=['GET'])
     def get_manufacturers():
-        manufacturer_objects = Manufacturer.query.order_by(Manufacturer.id).all()
+        manufacturer_objects = Manufacturer.query.order_by(
+            Manufacturer.id).all()
 
         if len(manufacturer_objects) == 0:
             abort(404)
@@ -60,8 +61,10 @@ def create_app(test_config=None):
 
     @app.route('/manufacturers/<int:manufacturer_id>/pedals', methods=['GET'])
     def get_pedals_by_manufacturer(manufacturer_id):
-        pedals_by_manufacturer_objects = Pedal.query.filter(Pedal.manufacturer_id == manufacturer_id).all()
-        manufacturer = Manufacturer.query.filter(Manufacturer.id == manufacturer_id).first()
+        pedals_by_manufacturer_objects = Pedal.query.filter(
+            Pedal.manufacturer_id == manufacturer_id).all()
+        manufacturer = Manufacturer.query.filter(
+            Manufacturer.id == manufacturer_id).first()
 
         if manufacturer is None:
             abort(404)
@@ -91,7 +94,8 @@ def create_app(test_config=None):
         website_link = body.get('website_link', None)
         try:
             manufacturer = Manufacturer(name=name, website_link=website_link)
-            exists = Manufacturer.query.filter(Manufacturer.name == name).one_or_none()
+            exists = Manufacturer.query.filter(
+                Manufacturer.name == name).one_or_none()
             if exists is None:
                 manufacturer.insert()
 
@@ -130,8 +134,9 @@ def create_app(test_config=None):
         manufacturer_id = body.get('manufacturer_id', None)
 
         try:
-            pedal = Pedal(name=name, pedal_type=pedal_type, new_price=new_price,
-                          used_price=used_price, manufacturer_id=manufacturer_id)
+            pedal = Pedal(name=name, pedal_type=pedal_type,
+                          new_price=new_price, used_price=used_price,
+                          manufacturer_id=manufacturer_id)
             exists = Pedal.query.filter(Pedal.name == name).one_or_none()
             if exists is None:
                 pedal.insert()
@@ -167,7 +172,8 @@ def create_app(test_config=None):
         name = body.get('name', None)
         website_link = body.get('website_link', None)
 
-        manufacturer = Manufacturer.query.filter(Manufacturer.id == manufacturer_id).one_or_none()
+        manufacturer = Manufacturer.query.filter(
+            Manufacturer.id == manufacturer_id).one_or_none()
 
         if manufacturer is None:
             abort(404)
@@ -227,7 +233,8 @@ def create_app(test_config=None):
     @app.route('/manufacturers/<int:manufacturer_id>', methods=['DELETE'])
     @requires_auth('delete:manufacturers')
     def delete_manufacturer(payload, manufacturer_id):
-        manufacturer = Manufacturer.query.filter(Manufacturer.id == manufacturer_id).one_or_none()
+        manufacturer = Manufacturer.query.filter(
+            Manufacturer.id == manufacturer_id).one_or_none()
         if manufacturer is None:
             abort(404)
         try:

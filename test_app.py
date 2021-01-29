@@ -74,11 +74,12 @@ class TestPedalsAPI(unittest.TestCase):
     # Test post request to /manufacturers
 
     def test_post_manufacturer(self):
-        res = self.client().post('/manufacturers',
-            headers = {
+        res = self.client().post(
+            '/manufacturers',
+            headers={
                 "Authorization": "Bearer {}".format(self.site_owner_token)
             },
-            json = {
+            json={
                 'name': 'Volcanic Audio',
                 'website_link': 'https://www.volcanicaudio.com'
             })
@@ -93,11 +94,12 @@ class TestPedalsAPI(unittest.TestCase):
     # Test unsuccessful post request entry already exists to /manufacturers
 
     def test_manufacturer_already_exists(self):
-        res = self.client().post('/manufacturers',
-            headers = {
+        res = self.client().post(
+            '/manufacturers',
+            headers={
                 "Authorization": "Bearer {}".format(self.site_owner_token)
             },
-            json = {
+            json={
                 'name': 'Boss',
                 'website_link': 'https://www.bossaudio.com'
             })
@@ -112,11 +114,12 @@ class TestPedalsAPI(unittest.TestCase):
     # Test post request to /pedals
 
     def test_post_pedal(self):
-        res = self.client().post('/pedals',
-            headers = {
+        res = self.client().post(
+            '/pedals',
+            headers={
                 "Authorization": "Bearer {}".format(self.site_owner_token)
             },
-            json = {
+            json={
                 'name': 'California Surf',
                 'pedal_type': 'Reverb',
                 'new_price': '$99.00',
@@ -134,11 +137,12 @@ class TestPedalsAPI(unittest.TestCase):
     # Test unsuccessful post request entry already exists to /pedals
 
     def test_pedal_already_exists(self):
-        res = self.client().post('/pedals',
-            headers = {
+        res = self.client().post(
+            '/pedals',
+            headers={
                 "Authorization": "Bearer {}".format(self.site_owner_token)
             },
-            json = {
+            json={
                 'name': 'Afterglow',
                 'pedal_type': 'Chorus',
                 'new_price': '$69.00',
@@ -156,11 +160,12 @@ class TestPedalsAPI(unittest.TestCase):
     # Test patch request to /manufacturers/37
 
     def test_update_manufacturer(self):
-        res = self.client().patch('/manufacturers/37',
-            headers = {
+        res = self.client().patch(
+            '/manufacturers/37',
+            headers={
                 "Authorization": "Bearer {}".format(self.site_owner_token)
             },
-            json = {
+            json={
                 'name': 'Changed Name',
                 'website_link': 'https://www.pedals.info.com'
             })
@@ -175,11 +180,12 @@ class TestPedalsAPI(unittest.TestCase):
     # Test unsuccessful patch request not found to /manufacturers/5000
 
     def test_patch_404_manufacturer_not_exists(self):
-        res = self.client().patch('/manufacturers/5000',
-            headers = {
+        res = self.client().patch(
+            '/manufacturers/5000',
+            headers={
                 "Authorization": "Bearer {}".format(self.site_owner_token)
             },
-            json = {
+            json={
                 'name': 'Changed Name',
                 'website_link': 'https://www.pedals.info.com'
             })
@@ -191,11 +197,12 @@ class TestPedalsAPI(unittest.TestCase):
     # Test patch request to /pedals/472
 
     def test_update_pedals(self):
-        res = self.client().patch('/pedals/472',
-            headers = {
+        res = self.client().patch(
+            '/pedals/472',
+            headers={
                 "Authorization": "Bearer {}".format(self.site_owner_token)
             },
-            json = {
+            json={
                 'name': 'Hot Rod',
                 'pedal_type': 'Distortion',
                 'new_price': '$79.00',
@@ -213,11 +220,12 @@ class TestPedalsAPI(unittest.TestCase):
     # Test unsuccessful patch request not found to /pedals/5000
 
     def test_patch_404_pedal_not_exists(self):
-        res = self.client().patch('/pedals/5000',
-            headers = {
+        res = self.client().patch(
+            '/pedals/5000',
+            headers={
                 "Authorization": "Bearer {}".format(self.site_owner_token)
             },
-            json = {
+            json={
                 'name': 'Hot Rod',
                 'pedal_type': 'Distortion',
                 'new_price': '$79.00',
@@ -233,8 +241,9 @@ class TestPedalsAPI(unittest.TestCase):
     # Test delete request to /manufacturers/29
 
     def test_delete_manufacturer(self):
-        res = self.client().delete('/manufacturers/29',
-            headers = {
+        res = self.client().delete(
+            '/manufacturers/29',
+            headers={
                 "Authorization": "Bearer {}".format(self.site_owner_token)
             })
         data = json.loads(res.data)
@@ -248,8 +257,9 @@ class TestPedalsAPI(unittest.TestCase):
     # Test delete manufacturer not found to /manufacturers/5000
 
     def test_404_manufacturer_to_delete_not_exists(self):
-        res = self.client().delete('/manufacturers/5000',
-            headers = {
+        res = self.client().delete(
+            '/manufacturers/5000',
+            headers={
                 "Authorization": "Bearer {}".format(self.site_owner_token)
             })
         data = json.loads(res.data)
@@ -262,8 +272,9 @@ class TestPedalsAPI(unittest.TestCase):
     # Test delete request to /pedals/600
 
     def test_delete_pedal(self):
-        res = self.client().delete('/pedals/600',
-            headers = {
+        res = self.client().delete(
+            '/pedals/600',
+            headers={
                 "Authorization": "Bearer {}".format(self.site_owner_token)
             })
         data = json.loads(res.data)
@@ -277,8 +288,9 @@ class TestPedalsAPI(unittest.TestCase):
     # Test delete manufacturer not found to /manufacturers/5000
 
     def test_404_pedal_to_delete_not_exists(self):
-        res = self.client().delete('/pedals/5000',
-            headers = {
+        res = self.client().delete(
+            '/pedals/5000',
+            headers={
                 "Authorization": "Bearer {}".format(self.site_owner_token)
             })
         data = json.loads(res.data)
@@ -292,11 +304,12 @@ class TestPedalsAPI(unittest.TestCase):
     # with Contributor credentials
 
     def test_permissions_contributor(self):
-        res = self.client().post('/manufacturers',
-            headers = {
+        res = self.client().post(
+            '/manufacturers',
+            headers={
                 "Authorization": "Bearer {}".format(self.contributor_token)
             },
-            json = {
+            json={
                 'name': 'Real Sounds',
                 'website_link': 'https://www.realsounds.com'
             })
@@ -312,11 +325,12 @@ class TestPedalsAPI(unittest.TestCase):
     # with Contributor credentials
 
     def test_permissions_denied_contributor(self):
-        res = self.client().patch('/pedals/365',
-            headers = {
+        res = self.client().patch(
+            '/pedals/365',
+            headers={
                 "Authorization": "Bearer {}".format(self.contributor_token)
             },
-            json = {
+            json={
                 'name': 'Tailfin',
                 'pedal_type': 'Vibrato',
                 'new_price': '$89.00',
