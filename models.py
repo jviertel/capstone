@@ -7,6 +7,7 @@ import json
 database_path = os.environ.get('DATABASE_URL_LIVE')
 db = SQLAlchemy()
 
+
 def setup_db(app, database_path=database_path):
     app.config["SQLALCHEMY_DATABASE_URI"] = database_path
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
@@ -14,13 +15,16 @@ def setup_db(app, database_path=database_path):
     db.init_app(app)
     migrate = Migrate(app, db)
 
+
 '''
 Manufacturer
 '''
+
+
 class Manufacturer(db.Model):
     __tablename__ = 'Manufacturer'
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(120)) 
+    name = db.Column(db.String(120))
     website_link = db.Column(db.String(500))
 
     def format(self):
@@ -29,21 +33,24 @@ class Manufacturer(db.Model):
             'name': self.name,
             'website_link': self.website_link
         }
-    
+
     def insert(self):
         db.session.add(self)
         db.session.commit()
-    
+
     def update(self):
         db.session.commit()
-    
+
     def delete(self):
         db.session.delete(self)
         db.session.commit()
 
+
 '''
 Pedal
 '''
+
+
 class Pedal(db.Model):
     __tablename__ = 'Pedal'
     id = db.Column(db.Integer, primary_key=True)
@@ -51,8 +58,10 @@ class Pedal(db.Model):
     pedal_type = db.Column(db.String(120))
     new_price = db.Column(db.String)
     used_price = db.Column(db.String)
-    #Change
-    manufacturer_id = db.Column(db.Integer, db.ForeignKey('Manufacturer.id', ondelete='CASCADE'), nullable=False)
+    manufacturer_id = db.Column(db.Integer,
+                                db.ForeignKey('Manufacturer.id',
+                                              ondelete='CASCADE'),
+                                nullable=False)
 
     def format(self):
         return {
@@ -63,16 +72,14 @@ class Pedal(db.Model):
             'used_price': self.used_price,
             'manufacturer_id': self.manufacturer_id
         }
-    
+
     def insert(self):
         db.session.add(self)
         db.session.commit()
-    
+
     def update(self):
         db.session.commit()
-    
+
     def delete(self):
         db.session.delete(self)
         db.session.commit()
-
-
