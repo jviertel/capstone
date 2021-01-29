@@ -7,15 +7,15 @@ from app import create_app
 from models import Pedal, Manufacturer, setup_db
 
 class TestPedalsAPI(unittest.TestCase):
-    site_owner_token = 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Ild3NW9Ya3ZhNHhEUmh3dGlwczlkMyJ9.eyJpc3MiOiJodHRwczovL2Rldi15azJtZ3RtYS51cy5hdXRoMC5jb20vIiwic3ViIjoiYXV0aDB8NjAxMDZiODlkZjdiNWEwMDcxOGRkN2FkIiwiYXVkIjoicGVkYWxzZGJhcGkiLCJpYXQiOjE2MTE4NDc0MzQsImV4cCI6MTYxMTkzMzgzNCwiYXpwIjoidVdodFpqRDNVV0NITTlCZmN0RDN0WWNBaEFVbmhXc20iLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbImRlbGV0ZTptYW51ZmFjdHVyZXJzIiwiZGVsZXRlOnBlZGFscyIsInBhdGNoOm1hbnVmYWN0dXJlcnMiLCJwYXRjaDpwZWRhbHMiLCJwb3N0Om1hbnVmYWN0dXJlcnMiLCJwb3N0OnBlZGFscyJdfQ.a5z_FAYktm9hHTcsbQj7UPaUzIx4Tftr0elmyLrIbTiUD35U00ral1UN32lXwehsag8VSRg21Q2wqbrfPcQH01462-HKP4CHwNq4GHsZ1UWjMtQreZXGp2yH8zmtOf9n8CFb0H43AY3zJXJ2wB0NIJcLoGKTs5ejZ_Bkg81k6NbYUQ4gXEObB7rrjnSr8oAoPBCEMt3v6c3Thkx212OgsNnm7q-AJgVCUjwlazVMnWg0NAJrK2Jh9qnjBTA3-lr1jvURqmVGo_bbKIgRw3dt9APAj1JnI_fR0BPGHsQayE1jGQXsC794LMHcSbKJRC5e8Z9lT_zRrOzEC64DIVA3KA'
+    site_owner_token = os.environ.get('SITE_OWNER_TOKEN')
 
-    contributor_token = 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Ild3NW9Ya3ZhNHhEUmh3dGlwczlkMyJ9.eyJpc3MiOiJodHRwczovL2Rldi15azJtZ3RtYS51cy5hdXRoMC5jb20vIiwic3ViIjoiYXV0aDB8NjAxMDZiZmQ2OGJmMTgwMDY5ZWQ1ZDkyIiwiYXVkIjoicGVkYWxzZGJhcGkiLCJpYXQiOjE2MTE4NDc1NTgsImV4cCI6MTYxMTkzMzk1OCwiYXpwIjoidVdodFpqRDNVV0NITTlCZmN0RDN0WWNBaEFVbmhXc20iLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbInBvc3Q6bWFudWZhY3R1cmVycyIsInBvc3Q6cGVkYWxzIl19.U3no-7x2qUfgVuPB5-T03QHABYVJZgpS_rW6SMHhyaamN_Dk2oi2CYFloZ6_o4sM7kZKqGheG6M24-p_h8CoPGBQG2JOxRQI6xbgycpeq4R3YYe1giDRrKS4_Bb72iOzJElXZw0ofket2-EfUGQ13ZLjLZVff6CASeB-UwwLBAfPBMP99fXIsXl8F2CRXgJEHTpbongec7k2QSA6TZcB-6bfIIe9OUl0xNZvGiaOwqHvIQKr6zEzHKaD0ZAjAA6HuNH5UI9_pbMduPOy3UoDxfSt9YNu8TPXZSl92tjTWChKSlgaunAngFc7oTmbDzLsFGMt2hvFGJLMJ7uWWcr4rQ'
+    contributor_token = os.environ.get('CONTRIBUTOR_TOKEN')
 
     def setUp(self):
         '''Run before tests'''
         self.app = create_app()
         self.client = self.app.test_client
-        self.database_path = 'postgresql://postgres:88c67e0d53bef241b661e0e3a6cb0cd1@localhost:5432/pedalsdb_test'
+        self.database_path = os.environ.get('DATABASE_URL_TESTING')
         setup_db(self.app, self.database_path)
 
         with self.app.app_context():
